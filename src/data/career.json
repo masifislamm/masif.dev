@@ -1,0 +1,39 @@
+{
+  "career": [
+    {
+      "name": "Freelancer at UpWork",
+      "href": "https://www.upwork.com/freelancers/~0104cd318bed0aa0a5",
+      "title": "Android & Web Developer (Contract)",
+      "logo": "/upwork.png",
+      "start": "Apr 2024",
+      
+      "description": [
+        "Developed and maintained Android applications using Kotlin and Java, focusing on performance, clean UI, and integration with RESTful APIs.",
+        "Built responsive and dynamic websites using modern frontend frameworks (React, Vue) and backend technologies (Node.js, PHP, Firebase)."
+      ],
+      "links": [
+        {
+          "name": "Review page",
+          "href": "https://www.upwork.com/freelancers/~0104cd318bed0aa0a5",
+          "icon": "user-pen"
+        }
+      ]
+    },
+    {
+      "name": "Itex Global Sourcing",
+      "href": "https://itexglobalsourcing.com",
+      "title": "IT Executive & Web Administrator",
+      "logo": "/itex.png",
+      "start": "Feb 2022",
+      "end": "Mar 2024",
+      "description": [
+        "Designed and developed the official company website to enhance brand presence and client accessibility.",
+        "Led IT operations, including system administration, email account setup, and troubleshooting for office staff.",
+        "Implemented and maintained digital infrastructure for order management, sales reporting, and internal workflow automation.",
+        "Provided technical support and ensured secure, consistent operation of all IT-related systems."
+      ]
+    }
+
+    
+  ]
+}

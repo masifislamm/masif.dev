@@ -1,0 +1,49 @@
+{
+  "projects": [
+    {
+      "name": "Hotel CatZ",
+      "description": "Book cat hotel stays and shop essentials—all in one pet-friendly platform.",
+      "image": "/catzhotel.png",
+      "tags": [
+        "WordPress",
+        "WooCommerce",
+        "Hotel Booking Plugin"
+
+      ],
+      "links": [
+        {
+          "name": "Website",
+          "href": "https://hotel.lionelasif.me/",
+          "icon": "globe"
+        },
+        {
+          "name": "Source",
+          "href": "https://github.com/mdasifislamm/HotelCatz",
+          "icon": "github"
+        }
+
+      ]
+    },
+    {
+      "name": "Cash Advance Android App",
+      "description": "An Android app for Loan, featuring real-time eligibility checks, user authentication, and seamless API integration.",
+      "image": "/cashapp.png",
+      "tags": [
+        "Android",
+        "API Integration",
+        "Firebase",
+        "Kotlin",
+        "Material Design"
+        
+      ],
+      "links": [
+        {
+          "name": "View",
+          "href": "https://play.google.com/store/apps/details?id=com.borrow.money.app.payday.loans&hl=en",
+          "icon": "scan-search"
+        }
+      ]
+    }
+ 
+  ]
+}

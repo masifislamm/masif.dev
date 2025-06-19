@@ -1,0 +1,19 @@
+{
+  "socials": [
+    {
+      "name": "LinkedIn",
+      "href": "https://www.linkedin.com/in/mdasifislam/",
+      "icon": "linkedin"
+    },
+    {
+      "name": "GitHub",
+      "href": "https://github.com/mdasifislamm",
+      "icon": "github"
+    },
+    {
+      "name": "Email",
+      "href": "mailto:phenomenalasif@gmail.com",
+      "icon": "mail"
+    }
+  ]
+}
