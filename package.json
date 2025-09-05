@@ -2,13 +2,13 @@
   "name": "masif.dev",
   "version": "0.1.0",
   "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "npm run gen && next build",
-    "gen": "npx ts-node ./scripts/generate.ts",
-    "start": "next start",
-    "lint": "next lint"
-  },
+"scripts": {
+  "dev": "next dev",
+  "build": "next build",
+  "gen": "npx ts-node ./scripts/generate.ts",
+  "start": "next start",
+  "lint": "next lint"
+},
   "dependencies": {
     "@datastax/astra-db-ts": "^1.4.1",
     "@hookform/resolvers": "^3.9.0",
