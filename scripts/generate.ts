@@ -6,15 +6,22 @@ import { Redis } from "@upstash/redis";
 import { DirectoryLoader } from "langchain/document_loaders/fs/directory";
 import { TextLoader } from "langchain/document_loaders/fs/text";
 import { RecursiveCharacterTextSplitter } from "langchain/text_splitter";
-import { getEmbeddingsCollection, getVectorStore } from "../src/lib/vectordb";
+import { getVectorStore } from "../src/lib/vectordb";
+import { sql } from "@vercel/postgres";
 
 async function generateEmbeddings() {
+  console.log("Ensuring database table exists...");
+  // Initialize the vector store, which also ensures the table exists.
   const vectorStore = await getVectorStore();
 
-  // clear existing data
-  (await getEmbeddingsCollection()).deleteMany({});
-  (await Redis.fromEnv()).flushdb();
+  console.log("Clearing existing data from the database and cache...");
+  // Clear existing data from the table
+  await sql`TRUNCATE TABLE embeddings;`;
+  
+  // Clear the Redis cache
+  await Redis.fromEnv().flushdb();
 
+  console.log("Loading documents...");
   const routeLoader = new DirectoryLoader(
     "src/app",
     {
@@ -42,8 +49,6 @@ async function generateEmbeddings() {
       return { pageContent: pageContentTrimmed, metadata: { url } };
     });
 
-  // console.log(routes);
-
   const routesSplitter = RecursiveCharacterTextSplitter.fromLanguage("html");
   const splitRoutes = await routesSplitter.splitDocuments(routes);
 
@@ -53,8 +58,6 @@ async function generateEmbeddings() {
   });
 
   const data = await dataLoader.load();
-
-  // console.log(data);
 
   const dataSplitter = RecursiveCharacterTextSplitter.fromLanguage("js");
   const splitData = await dataSplitter.splitDocuments(data);
@@ -76,14 +79,15 @@ async function generateEmbeddings() {
       return { pageContent: pageContentTrimmed, metadata: post.metadata };
     });
 
-  // console.log(posts);
-
   const postSplitter = RecursiveCharacterTextSplitter.fromLanguage("markdown");
   const splitPosts = await postSplitter.splitDocuments(posts);
 
+  console.log("Adding documents to the vector store...");
   await vectorStore.addDocuments(splitRoutes);
   await vectorStore.addDocuments(splitData);
   await vectorStore.addDocuments(splitPosts);
+
+  console.log("Embedding generation complete!");
 }
 
 generateEmbeddings();

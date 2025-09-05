@@ -1,32 +1,15 @@
-import { DataAPIClient } from "@datastax/astra-db-ts";
-import { AstraDBVectorStore } from "@langchain/community/vectorstores/astradb";
+import { VercelPostgres } from "@langchain/community/vectorstores/vercel_postgres";
 import { OpenAIEmbeddings } from "@langchain/openai";
 
-const endpoint = process.env.ASTRA_DB_API_ENDPOINT || "";
-const token = process.env.ASTRA_DB_APPLICATION_TOKEN || "";
-const collection = process.env.ASTRA_DB_COLLECTION || "";
-
-if (!endpoint || !token || !collection) {
-  throw new Error("Please set environmental variables for Astra DB!");
-}
-
 export async function getVectorStore() {
-  return AstraDBVectorStore.fromExistingIndex(
-    new OpenAIEmbeddings({ model: "text-embedding-3-small" }),
-    {
-      token,
-      endpoint,
-      collection,
-      collectionOptions: {
-        vector: { dimension: 1536, metric: "cosine" },
-      },
-    },
-  );
+  const embeddings = new OpenAIEmbeddings({ model: "text-embedding-3-small" });
+
+  // Use the initialize method to create an instance
+  const vectorStore = await VercelPostgres.initialize(embeddings, {
+    tableName: "embeddings",
+  });
+
+  return vectorStore;
 }
 
-export async function getEmbeddingsCollection() {
-  const client = new DataAPIClient(token);
-  const db = client.db(endpoint);
-
-  return db.collection(collection);
-}
+export { VercelPostgres as VercelPostgresStore };
